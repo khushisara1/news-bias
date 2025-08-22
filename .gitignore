@@ -1,0 +1,27 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+.venv/
+env/
+venv/
+
+# Ignore environment/secret files
+.env
+.env.local
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore Jupyter/Colab checkpoints
+.ipynb_checkpoints/
+
+# Ignore Streamlit cache
+.streamlit/
+
+# Ignore log files
+*.log
