@@ -2,15 +2,20 @@ import os
 from typing import List, Dict
 from dotenv import load_dotenv
 import google.generativeai as genai
+import streamlit as st
 
 load_dotenv()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+try:
+    GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+except Exception:
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
 if not GEMINI_API_KEY:
-    raise RuntimeError("GEMINI_API_KEY not found. Set it in .env")
+    raise RuntimeError("GEMINI_API_KEY not found. Set it in .env or Streamlit secrets.")
 
-genai.configure(api_key="AIzaSyDeKEbE5UFoVZtgAVJmIzthJufWk_lcvEc")
+genai.configure(api_key=GEMINI_API_KEY)
 MODEL = genai.GenerativeModel("gemini-1.5-flash")
-
 SUMMARY_PROMPT = """You are a helpful news editor. For each article, write a crisp 2–3 line summary.
 - Be neutral and factual
 - Avoid sensationalism

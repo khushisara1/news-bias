@@ -1,5 +1,6 @@
 import os
 import requests
+import streamlit as st
 from typing import List, Dict, Optional
 from dotenv import load_dotenv
 
@@ -11,8 +12,16 @@ BASE_URL = "https://newsapi.org/v2"
 HEADERS = {"X-Api-Key": NEWSAPI_KEY or ""}
 
 def _guard():
-    if not NEWSAPI_KEY:
-        raise RuntimeError("NEWSAPI_KEY not found. Set it in .env")
+    # First try Streamlit secrets
+    key = None
+    try:
+        key = st.secrets["NEWSAPI_KEY"]
+    except Exception:
+        key = os.getenv("NEWSAPI_KEY")  # fallback for local
+    
+    if not key:
+        raise RuntimeError("NEWSAPI_KEY not found. Set it in .env or Streamlit secrets.")
+    return key
 
 def search_news(
     query: Optional[str] = None,
