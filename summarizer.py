@@ -8,7 +8,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise RuntimeError("GEMINI_API_KEY not found. Set it in .env")
 
-genai.configure(api_key=GEMINI_API_KEY)
+genai.configure(api_key="AIzaSyDeKEbE5UFoVZtgAVJmIzthJufWk_lcvEc")
 MODEL = genai.GenerativeModel("gemini-1.5-flash")
 
 SUMMARY_PROMPT = """You are a helpful news editor. For each article, write a crisp 2–3 line summary.
